@@ -2,6 +2,8 @@
 
 Launcher and pre-configured compatibility environment for the 1997 Dutch educational classic **"Ontdekkingstocht in de IJzige Rekenstorm"** (Dutch edition of *Treasure MathStorm!* by The Learning Company).
 
+![Ontdekkingstocht in de IJzige Rekenstorm Screenshot](screenshot.png)
+
 ## Analysis & Compatibility
 
 Analysis of the CD media indicates that this release is a **pure 16-bit Windows (Win16)** game utilizing Microsoft WinG and Windows Multimedia (MCI/Wave/MIDI) — it contains **no DOS executables**.
