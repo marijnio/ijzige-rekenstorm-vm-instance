@@ -6,9 +6,7 @@ Launcher and pre-configured compatibility environment for the 1997 Dutch educati
 
 Analysis of the CD media indicates that this release is a **pure 16-bit Windows (Win16)** game utilizing Microsoft WinG and Windows Multimedia (MCI/Wave/MIDI) — it contains **no DOS executables**.
 
-This repository provides two pre-configured setups:
-1. **otvdm (winevdm) + Magpie** *(Recommended)*: Plays natively on 64-bit modern Windows with 256-color DIB palette emulation and integer fullscreen scaling.
-2. **DOSBox-X**: Configured with Sound Blaster 16 (`sb16`), 256-color SVGA (`svga_s3`), and auto-mounting of the CD as drive `D:`.
+This repository runs the game natively on 64-bit modern Windows using **otvdm (WineVDM)** paired with **Magpie** for full-screen scaling and custom shader filters.
 
 ---
 
@@ -28,23 +26,35 @@ The CD image is copyrighted and is **not included** in this repository.
 
 ## How to Play
 
-### Option 1: Native Play via otvdm (Recommended)
 1. Double-click **`launch_rekenstorm.bat`**.
 2. The script will automatically:
-   - Start Magpie in the background (for full-screen upscaling).
+   - Start Magpie in the background (for fullscreen upscaling).
    - Mount `iso\REKENSTORM.ISO` to drive **`D:`**.
-   - Launch `D:\TMSWINCD\TMSWINCD.EXE` via `otvdm` with 256-color palette support.
+   - Launch `D:\TMSWINCD\TMSWINCD.EXE` via `otvdm` with 256-color palette support and CPU throttling.
 3. In the 640×480 notice dialog, click **"Verdergaan"** (Continue).
 4. **Fullscreen (Upscaling):**
    - Click inside the game window.
-   - Press **`Win` + `Shift` + `A`** to scale the window to fullscreen borderless with integer scaling.
+   - Press **`Win` + `Shift` + `A`** to scale the window to fullscreen with high-quality shaders.
    - Press **`Win` + `Shift` + `A`** or **`Esc`** to exit fullscreen.
 5. When you close the game, the script cleanly unmounts drive `D:`.
 
-### Option 2: DOSBox-X Environment
-1. Double-click **`launch_dosbox.bat`**.
-2. Launches DOSBox-X with Sound Blaster 16 (`sb16`), 256-color SVGA, and mounts `iso\REKENSTORM.ISO` as drive `D:`.
-3. To run the 16-bit Windows game inside DOSBox-X, boot into a guest Windows 3.1 or Windows 95 installation.
+---
+
+## Configuration & Tuning
+
+### Game Speed / Tick Rate
+If characters move too fast or too slow, you can adjust the tick throttle in **`otvdm\otvdm.ini`**:
+```ini
+PeekMessageSleep=30   ; milliseconds to sleep per message loop check
+```
+- Increase the value (e.g., `30` or `35`) if game events or clocks run too fast.
+- Decrease the value (e.g., `10` or `15`) if movement feels sluggish.
+
+### Fullscreen Upscaling Quality (Magpie)
+Open the Magpie window from your system tray to change the **Scale Mode**:
+- **Anime4K**: Excellent for cartoon / hand-drawn 90s graphics; smooths color fills and outlines.
+- **FSR (AMD FidelityFX Super Resolution)**: Crisp, high-definition scaling that fills full screen height.
+- **CRT-Geom**: Simulates an authentic 90s CRT curved monitor with scanlines.
 
 ---
 
@@ -52,6 +62,5 @@ The CD image is copyrighted and is **not included** in this repository.
 
 - `launch_rekenstorm.bat`: One-click launcher for otvdm + Magpie + ISO mount.
 - `mount_iso.ps1`: Helper script that mounts the ISO to drive `D:` and dismounts upon exit.
-- `otvdm/`: Pre-configured otvdm (winevdm) v0.9.0 with `DIBPalette=1` (256-color emulation).
+- `otvdm/`: Pre-configured otvdm (winevdm) with 256-color DIB emulation and CPU loop throttling.
 - `magpie/`: Magpie v0.13.0 window upscaler.
-- `dosbox-x/` & `dosbox-x.conf`: DOSBox-X configuration with SB16 and SVGA.
