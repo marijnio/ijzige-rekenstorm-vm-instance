@@ -1,0 +1,11 @@
+# ISO images (copyrighted media)
+iso/
+*.iso
+*.ISO
+
+# Temporary and log files
+*.zip
+*.tmp
+*.log
+logs/
+magpie/logs/
